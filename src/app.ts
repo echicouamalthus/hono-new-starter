@@ -1,19 +1,15 @@
-import { Hono } from "hono";
-import { cors } from "hono/cors";
+import configureOpenApi from "./lib/configure-open-api";
+import createApp from "./lib/create-app";
+import index from "./routes/index.route";
 
-const app = new Hono().basePath("/api");
+const app = createApp();
 
-app.use(
-  "*",
-  cors({
-    origin: "http://localhost:9999/api", // Replace with your frontend's origin
-    allowMethods: ["GET", "POST", "PUT", "DELETE"], // Allow specific methods
-    allowHeaders: ["Content-Type", "Authorization", "Cookie"], // Allow specific headers
-  }),
-);
+configureOpenApi(app);
 
-app.get("/", (c) => {
-  return c.json({ message: "Congrats! You've deployed Hono to Vercel" });
+const routes = [index] as const;
+
+routes.forEach((route) => {
+  app.route("/", route);
 });
 
 export default app;
