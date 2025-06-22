@@ -9,7 +9,7 @@ export function createRouter() {
   return new OpenAPIHono<AppBindings>({
     strict: false,
     defaultHook,
-  }).basePath("/api");
+  });
 }
 
 export default function createApp() {
