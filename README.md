@@ -16,7 +16,7 @@ To run:
 bun run dev
 ```
 
-open http://localhost:9999
+open http://localhost:9999/api
 
 To deploy:
 
